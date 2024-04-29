@@ -1,0 +1,31 @@
+global proc FileLocator()
+    {
+
+    };
+string $fileLocatorInfo = `whatIs FileLocator`;
+
+string $installPath = `substring $fileLocatorInfo 25 99`;
+
+string $plugInDir = `dirname($installPath)`;
+
+string $plugInSrcDir = $plugInDir + "/src/";
+string $plugInAssetDir = $plugInDir + "/assets/";
+
+global proc AddShelfBtnForTool(string $srcFileName)
+{
+    global string $plugInSrcDir;
+    global string $plugInAssetDir;
+    string $srcFilePath = $plugInSrcDir + $srcFileName + ".py";
+    string $iconPath = $plugInAssetDir + $srcFileName + ".png";
+
+    //get current active shelf
+    string $currentShelf = `tabLayout -q -selectTab "ShelfLayout"`;
+    //set the parent for the next ui elements to be in the current shelf
+    setParent $currentShelf;
+
+    string $command = "exec(open(\"" + $srcFilePath + "\").read())";
+    shelfButton -c $command -stp "python" -image $iconPath;
+
+}
+AddShelfBtnForTool("CreateController");
+AddShelfBtnForTool("MayaToUE");
