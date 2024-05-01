@@ -9,3 +9,5 @@ this is a collection of tools I developed in class to help with the animation pr
 <img src = assets/ss_instructions.png>
 
 * drag the install.mel into maya viewport
+
+## Instructions
